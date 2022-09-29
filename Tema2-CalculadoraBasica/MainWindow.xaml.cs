@@ -27,21 +27,33 @@ namespace Tema2_CalculadoraBasica
 
         private void calcularButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (operadorTextBox.Text)
+            if (String.IsNullOrEmpty(operando1TextBox.Text) || String.IsNullOrEmpty(operando2TextBox.Text))
             {
-                case "+":
-                    resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) + int.Parse(operando2TextBox.Text)).ToString();
-                    break;
-                case "-":
-                    resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) - int.Parse(operando2TextBox.Text)).ToString();
-                    break;
-                case "*":
-                    resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) * int.Parse(operando2TextBox.Text)).ToString();
-                    break;
-                case "/":
-                    resultadoTextBox.Text=operando1TextBox.Text=="0"?(int.Parse(operando1TextBox.Text) / int.Parse(operando2TextBox.Text)).ToString():"0";
-                    break;
+                MessageBox.Show("Se ha producido un error. Revise los operandos");
             }
+            try
+            {
+                switch (operadorTextBox.Text)
+                {
+                    case "+":
+                        resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) + int.Parse(operando2TextBox.Text)).ToString();
+                        break;
+                    case "-":
+                        resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) - int.Parse(operando2TextBox.Text)).ToString();
+                        break;
+                    case "*":
+                        resultadoTextBox.Text = (int.Parse(operando1TextBox.Text) * int.Parse(operando2TextBox.Text)).ToString();
+                        break;
+                    case "/":
+                        resultadoTextBox.Text = operando1TextBox.Text == "0" ? (int.Parse(operando1TextBox.Text) / int.Parse(operando2TextBox.Text)).ToString() : "0";
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Se ha producido un error. Revise los operandos");
+            }
+            
         }
 
         private void operadorTextBox_TextChanged(object sender, TextChangedEventArgs e)
